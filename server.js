@@ -50,8 +50,6 @@ const apiRoutes = express.Router();
 apiRoutes.post('/authenticate', (req, res) => {
 
     // Find user by email
-    console.log(req.body);
-    console.log(req.body.email)
     User.findOne({
         email: req.body.email
     }, (err, user) => {
@@ -73,7 +71,13 @@ apiRoutes.post('/authenticate', (req, res) => {
                 const token = jwt.sign(payload, app.get('superSecret'), {
                     expiresIn: '24h' // Expires in a month
                 });
-                res.json({"token": token});
+                res.json({
+                    "id": user._id,
+                    "email": user.email,
+                    "first_name": user.firstName,
+                    "last_name": user.lastName,
+                    "token": token
+                });
             }
         }
     });
@@ -83,7 +87,6 @@ apiRoutes.post('/authenticate', (req, res) => {
 apiRoutes.use( (req, res, next) => {
     // Check header, body, and parameter for the token
     const token = req.body.token || req.query.token || req.headers['x-access-token'];
-    console.log(token);
     // Decode token
     if (token) {
         jwt.verify(token, app.get('superSecret'), (err, success) => {
