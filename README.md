@@ -21,12 +21,12 @@ npm -v
 
 Then install the following NodeJS packages:
 
-+ express - our web application framework
-+ body-parser - parses `Content-Types` in Request
-+ jsonwebtoken - our JWT token manager
-+ mongodb - our database
-+ mongoose - communicates with our MongoDB database
-+ morgan - logs our middleware
++ `express` - our web application framework
++ `body-parser` - parses `Content-Type`s in Request
++ `jsonwebtoken` - our JWT token manager
++ `mongodb` - our database
++ `mongoose` - communicates with our MongoDB database
++ `morgan` - logs our middleware
 
 ```sh
 npm express body-parser jsonwebtoken mongodb mongoose morgan --save
